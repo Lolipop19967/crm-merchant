@@ -1,21 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!--
-NOTE FOR DEVELOPERS:
-
-This project is currently connected to Firebase.
-
-If you plan to connect it to another database (e.g. Supabase, custom backend, etc),
-you MUST first remove all Firebase-related code, scripts, and configurations.
-
-This includes:
-- Firebase SDK imports
-- Initialization scripts
-- Auth / Firestore / Realtime DB calls
-
-Failing to do so may cause conflicts or duplicate data handling.
--->
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -209,54 +193,7 @@ td.name { font-weight: 500; color: var(--text); }
 .empty { padding: 60px 20px; text-align: center; color: var(--text3); }
 .empty h3 { font-size: 15px; font-weight: 500; color: var(--text2); margin-bottom: 6px; }
 
-/* REPORT MODAL */
-.rpt-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(4px); z-index: 200; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
-.rpt-overlay.open { opacity: 1; pointer-events: all; }
-.rpt-modal { background: var(--bg2); border: 1px solid var(--border2); border-radius: var(--radius-lg); width: 100%; max-width: 480px; padding: 0; overflow: hidden; }
-.rpt-header { padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-.rpt-header h2 { font-size: 15px; font-weight: 600; }
-.rpt-body { padding: 24px; display: flex; flex-direction: column; gap: 20px; }
-.rpt-section-label { font-size: 11px; font-weight: 500; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
-.rpt-month-row { display: flex; align-items: center; gap: 10px; }
-.rpt-month-row label { font-size: 13px; color: var(--text2); flex-shrink: 0; }
-.rpt-month-row select { padding: 8px 12px; background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-size: 13px; font-family: 'DM Sans', sans-serif; flex: 1; }
-.rpt-month-row select:focus { outline: none; border-color: var(--accent); }
-.rpt-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.rpt-card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; display: flex; flex-direction: column; gap: 8px; }
-.rpt-card-title { font-size: 13px; font-weight: 600; color: var(--text); }
-.rpt-card-sub { font-size: 11px; color: var(--text3); line-height: 1.5; }
-.rpt-card-btns { display: flex; gap: 6px; margin-top: 4px; }
-.rpt-btn { flex: 1; padding: 7px 10px; border-radius: 8px; border: 1px solid var(--border2); background: var(--bg2); color: var(--text2); font-size: 12px; font-weight: 500; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 5px; }
-.rpt-btn:hover { background: var(--accent-bg); border-color: rgba(124,108,250,0.4); color: var(--accent2); }
-.rpt-btn.pdf { border-color: rgba(248,113,113,0.3); color: var(--red); }
-.rpt-btn.pdf:hover { background: var(--red-bg); border-color: var(--red); }
-.rpt-btn.docx { border-color: rgba(96,165,250,0.3); color: var(--blue); }
-.rpt-btn.docx:hover { background: var(--blue-bg); border-color: var(--blue); }
-.rpt-footer { padding: 14px 24px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; }
-.btn-green { background: rgba(74,222,128,0.15); color: var(--green); border: 1px solid rgba(74,222,128,0.3); }
-.btn-green:hover { background: rgba(74,222,128,0.25); }
-
 @media(max-width:768px){ .sidebar{display:none} .stats-bar{flex-wrap:wrap} }
-
-/* CREDENTIALS */
-.cred-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
-.cred-card-header { padding: 12px 16px; background: var(--bg3); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; cursor: grab; user-select: none; }
-.cred-card-header:active { cursor: grabbing; }
-.cred-card-title { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
-.cred-card-body { padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
-.cred-row { display: flex; flex-direction: column; gap: 3px; }
-.cred-label { font-size: 10px; font-weight: 500; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; }
-.cred-val { font-size: 13px; color: var(--text); font-family: 'DM Mono', monospace; display: flex; align-items: center; gap: 6px; word-break: break-all; }
-.cred-link { color: var(--blue); text-decoration: none; font-size: 12px; }
-.cred-link:hover { text-decoration: underline; }
-.cred-copy { padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border2); background: var(--bg3); color: var(--text3); cursor: pointer; font-size: 10px; font-family: 'DM Sans', sans-serif; transition: all 0.15s; flex-shrink: 0; }
-.cred-copy:hover { background: var(--accent-bg); color: var(--accent2); border-color: rgba(124,108,250,0.4); }
-.cred-pass-wrap { display: flex; align-items: center; gap: 6px; }
-.cred-extra-card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; position: relative; cursor: grab; }
-.cred-extra-card:active { cursor: grabbing; }
-.cred-extra-card.drag-over { border-color: var(--accent); background: var(--accent-bg); }
-.cred-card.dragging { opacity: 0.4; }
-
 </style>
 </head>
 <body>
@@ -272,13 +209,10 @@ td.name { font-weight: 500; color: var(--text); }
   <div class="sidebar-section">
     <div class="sidebar-label">Navigation</div>
     <div class="sidebar-item active" id="nav-merchants" onclick="showPage('merchants')">
-      <span>Merchants</span>
+      <span>🏪 Merchants</span>
     </div>
     <div class="sidebar-item" id="nav-branded-app" onclick="showPage('branded-app')">
-      <span>Custom Branded App</span>
-    </div>
-    <div class="sidebar-item" id="nav-credentials" onclick="showPage('credentials')">
-      <span>Credentials</span>
+      <span>📱 Custom Branded App</span>
     </div>
   </div>
 
@@ -326,7 +260,7 @@ td.name { font-weight: 500; color: var(--text); }
 <!-- MAIN -->
 <div class="main">
   <div id="configBanner" class="config-banner" style="display:none">
-    Firebase not configured. Data saved locally.
+    ⚙️ Firebase not configured. Data saved locally.
   </div>
 
   <!-- MERCHANTS PAGE -->
@@ -350,10 +284,6 @@ td.name { font-weight: 500; color: var(--text); }
         Import
         <input type="file" accept=".json,.csv,.tsv" onchange="importData(event)" style="display:none">
       </label>
-      <button class="btn btn-green" onclick="openReportModal()">
-        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-        Reports
-      </button>
       <button class="btn btn-primary" onclick="openModal()">
         <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         Add Merchant
@@ -420,7 +350,7 @@ td.name { font-weight: 500; color: var(--text); }
   <!-- BRANDED APP PAGE -->
   <div class="page" id="page-branded-app">
     <div class="topbar">
-      <span class="topbar-title">Custom Branded App</span>
+      <span class="topbar-title">📱 Custom Branded App</span>
       <div style="flex:1"></div>
       <select class="filter-select" id="ba-filter-group" onchange="renderBrandedApp()">
         <option value="">All Groups</option>
@@ -441,87 +371,10 @@ td.name { font-weight: 500; color: var(--text); }
     </div>
   </div>
 
-  <!-- CREDENTIALS PAGE -->
-  <div class="page" id="page-credentials">
-    <div class="topbar">
-      <span class="topbar-title">Credentials</span>
-      <div style="flex:1"></div>
-      <label class="btn btn-ghost" style="cursor:pointer" title="Upload spreadsheet with Business Name + New Passwords columns">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-        Upload Passwords
-        <input type="file" accept=".xlsx,.xls,.csv" onchange="importPasswordSheet(event)" style="display:none">
-      </label>
-      <div class="search-wrap">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input type="text" id="cred-search" placeholder="Search merchants…" oninput="renderCredPage()">
-      </div>
-    </div>
-    <div class="content">
-      <div id="credPageGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px"></div>
-    </div>
-  </div>
-
-</div><!-- end .main -->
-</div><!-- end .app -->
-
-<!-- REPORT MODAL -->
-<div class="rpt-overlay" id="rptOverlay" onclick="if(event.target===this)closeReportModal()">
-  <div class="rpt-modal">
-    <div class="rpt-header">
-      <h2>📄 Download Monthly Reports</h2>
-      <button class="close-btn" onclick="closeReportModal()">✕</button>
-    </div>
-    <div class="rpt-body">
-      <div>
-        <div class="rpt-section-label">Select Month to Report On</div>
-        <div class="rpt-month-row">
-          <label>Month:</label>
-          <select id="rpt-month">
-            <option value="0">— All Months —</option>
-            <option value="1">January</option><option value="2">February</option><option value="3">March</option>
-            <option value="4">April</option><option value="5">May</option><option value="6">June</option>
-            <option value="7">July</option><option value="8">August</option><option value="9">September</option>
-            <option value="10">October</option><option value="11">November</option><option value="12">December</option>
-          </select>
-        </div>
-      </div>
-      <div>
-        <div class="rpt-section-label">Choose Report Type</div>
-        <div class="rpt-cards">
-          <div class="rpt-card">
-            <div class="rpt-card-title">👤 Client Report</div>
-            <div class="rpt-card-sub">For the client — shows their onboarding progress, what's been done, what's still outstanding, and their current status.</div>
-            <div class="rpt-card-btns">
-              <button class="rpt-btn pdf" onclick="generateReport('client','pdf')">
-                <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>PDF
-              </button>
-              <button class="rpt-btn docx" onclick="generateReport('client','docx')">
-                <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>DOCX
-              </button>
-            </div>
-          </div>
-          <div class="rpt-card">
-            <div class="rpt-card-title">🏢 Internal Report</div>
-            <div class="rpt-card-sub">For your team — shows which operator and onboarding specialist handled each client, what was done, and overall team performance.</div>
-            <div class="rpt-card-btns">
-              <button class="rpt-btn pdf" onclick="generateReport('internal','pdf')">
-                <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>PDF
-              </button>
-              <button class="rpt-btn docx" onclick="generateReport('internal','docx')">
-                <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>DOCX
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="rpt-footer">
-      <button class="btn btn-ghost" onclick="closeReportModal()">Close</button>
-    </div>
-  </div>
+</div>
 </div>
 
-<!-- MERCHANT MODAL -->
+<!-- MODAL -->
 <div class="overlay" id="overlay" onclick="overlayClick(event)">
   <div class="modal">
     <div class="modal-header">
@@ -529,13 +382,12 @@ td.name { font-weight: 500; color: var(--text); }
         <h2 id="modalTitle">New Merchant</h2>
         <p id="modalId">New record</p>
       </div>
-      <button class="close-btn" onclick="closeModal()"></button>
+      <button class="close-btn" onclick="closeModal()">✕</button>
     </div>
     <div class="modal-tabs">
       <div class="modal-tab active" onclick="switchTab('details')">Details</div>
-      <div class="modal-tab" onclick="switchTab('brandedapp')">Branded App</div>
-      <div class="modal-tab" onclick="switchTab('credentials')">Credentials</div>
-      <div class="modal-tab" onclick="switchTab('notesdocs')">Notes & Docs</div>
+      <div class="modal-tab" onclick="switchTab('brandedapp')">📱 Branded App</div>
+      <div class="modal-tab" onclick="switchTab('notesdocs')">📎 Notes & Docs</div>
     </div>
     <div class="modal-body">
 
@@ -687,12 +539,12 @@ td.name { font-weight: 500; color: var(--text); }
           <div class="form-section-title">Developer Accounts</div>
           <div class="ba-section">
             <div class="ba-row">
-              <div class="ba-row-label" style="min-width:150px">iOS Dev Account</div>
+              <div class="ba-row-label" style="min-width:150px">🍎 iOS Dev Account</div>
               <span class="screen-badge" id="ba-devios" onclick="toggleBadge('ba-devios','s-ios')">Created</span>
               <input type="text" id="ba-devios-notes" class="notes-input" placeholder="Notes…">
             </div>
             <div class="ba-row">
-              <div class="ba-row-label" style="min-width:150px">Android Dev Account</div>
+              <div class="ba-row-label" style="min-width:150px">🤖 Android Dev Account</div>
               <span class="screen-badge" id="ba-devandroid" onclick="toggleBadge('ba-devandroid','s-android')">Created</span>
               <input type="text" id="ba-devandroid-notes" class="notes-input" placeholder="Notes…">
             </div>
@@ -703,48 +555,16 @@ td.name { font-weight: 500; color: var(--text); }
           <div class="form-section-title">Publish</div>
           <div class="ba-section">
             <div class="ba-row">
-              <div class="ba-row-label" style="min-width:150px">iOS</div>
+              <div class="ba-row-label" style="min-width:150px">🍎 iOS</div>
               <span class="screen-badge" id="ba-pubios" onclick="toggleBadge('ba-pubios','s-ios')">Published</span>
               <input type="text" id="ba-ios-link" class="link-input" placeholder="App Store link…">
             </div>
             <div class="ba-row">
-              <div class="ba-row-label" style="min-width:150px">Android</div>
+              <div class="ba-row-label" style="min-width:150px">🤖 Android</div>
               <span class="screen-badge" id="ba-pubandroid" onclick="toggleBadge('ba-pubandroid','s-android')">Published</span>
               <input type="text" id="ba-android-link" class="link-input" placeholder="Play Store link…">
             </div>
           </div>
-        </div>
-      </div>
-
-      <!-- TAB: CREDENTIALS -->
-      <div class="tab-pane" id="tab-credentials">
-        <div class="form-section">
-          <div class="form-section-title">GHL Login Credentials</div>
-          <div class="form-grid">
-            <div class="field">
-              <label>GHL Login URL</label>
-              <input type="text" id="f-ghlUrl" placeholder="https://app.gohighlevel.com/…">
-            </div>
-            <div class="field">
-              <label>GHL Username / Email</label>
-              <input type="text" id="f-ghlUser" placeholder="merchant@email.com">
-            </div>
-            <div class="field">
-              <label>GHL Password</label>
-              <div style="position:relative">
-                <input type="password" id="f-ghlPass" placeholder="Password" style="padding-right:36px;width:100%">
-                <button type="button" onclick="togglePassVis('f-ghlPass',this)" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text3);cursor:pointer;font-size:13px;padding:0">👁</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-section">
-          <div class="form-section-title" style="display:flex;align-items:center;justify-content:space-between">
-            <span>Extra Credentials</span>
-            <button type="button" class="btn btn-ghost" style="font-size:12px;padding:4px 10px" onclick="addCredentialCard()">+ Add</button>
-          </div>
-          <div id="credCardsWrap" style="display:flex;flex-direction:column;gap:10px"></div>
         </div>
       </div>
 
@@ -754,9 +574,9 @@ td.name { font-weight: 500; color: var(--text); }
           <div class="form-section-title">Attached Documents</div>
           <div class="doc-list" id="docList"></div>
           <div class="doc-btns">
-            <label class="doc-btn">Add Word Doc <input type="file" accept=".doc,.docx" onchange="addDoc(event,'doc')" style="display:none"></label>
-            <label class="doc-btn">Add Image <input type="file" accept="image/*" onchange="addDoc(event,'img')" style="display:none"></label>
-            <label class="doc-btn">Add PDF <input type="file" accept=".pdf" onchange="addDoc(event,'pdf')" style="display:none"></label>
+            <label class="doc-btn">📄 Add Word Doc <input type="file" accept=".doc,.docx" onchange="addDoc(event,'doc')" style="display:none"></label>
+            <label class="doc-btn">🖼️ Add Image <input type="file" accept="image/*" onchange="addDoc(event,'img')" style="display:none"></label>
+            <label class="doc-btn">📋 Add PDF <input type="file" accept=".pdf" onchange="addDoc(event,'pdf')" style="display:none"></label>
           </div>
         </div>
         <div class="form-section">
@@ -781,7 +601,6 @@ td.name { font-weight: 500; color: var(--text); }
   </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
 <script>
@@ -798,25 +617,10 @@ const FIREBASE_CONFIG = {
 const STATUSES = ['In Progress','Live','Paused','Cancelled'];
 const MONTHS = ['','January','February','March','April','May','June','July','August','September','October','November','December'];
 const TZ = ['EST','CST','MST','PST','AEDT','BST','UTC-12','UTC-11','UTC-10','UTC-9','UTC-8 (PT)','UTC-7 (MT)','UTC-6 (CT)','UTC-5 (ET)','UTC-4','UTC-3','UTC-2','UTC-1','UTC+0','UTC+1','UTC+2 (SAST)','UTC+3','UTC+4','UTC+5','UTC+5:30','UTC+6','UTC+7','UTC+8','UTC+9','UTC+10','UTC+11','UTC+12'];
-const MODULES = [
-  // Core setup
-  'Company Info','Staff & Positions','Services','Classes','Memberships',
-  // Operations
-  'Schedules','Promotions','Featured Items','Products','Resources',
-  // Finance & Sales
-  'POS','Payments','Taxes',
-  // Customers & Leads
-  'Customers & Leads',
-  // Automations & Policy
-  'Automations','Cancellation Policy',
-  // App & Branding
-  'Template','Customized Theme','Media',
-  // Misc
-  'Tags','Forms','Marketing','Branch'
-];
+const MODULES = ['Staff','Roles','Company','Services','Classes','Memberships','Schedules','Promotions','Customer','Leads','Automations','Cancellation Policy','Featured Items','Products','Resources','POS','Payments','Positions','Branch'];
 
 let merchants = [], activeStatusFilter = 'All', db = null, dbRef = null, useFirebase = false;
-let editingId = null, pendingDocs = [], pendingCredCards = [], currentPage = 'merchants';
+let editingId = null, pendingDocs = [], currentPage = 'merchants';
 
 // INIT
 const tzSel = document.getElementById('f-timezone');
@@ -869,30 +673,9 @@ function saveData(cb) {
   localStorage.setItem('mccrm_v5', JSON.stringify(merchants));
   if (useFirebase && dbRef) {
     setSyncStatus('syncing','Saving…');
-    // Pause the live listener to prevent it overwriting our merchants array mid-write
-    dbRef.off('value');
     const obj = {};
-    merchants.forEach(m => { const k = (m._fbKey||String(m.id)).replace(/[.#$\/\[\]]/g,'_'); const c={...m}; delete c._fbKey; obj[k]=c; });
-    dbRef.set(obj).then(() => {
-      setSyncStatus('connected','Synced');
-      if (cb) cb();
-    }).catch(() => {
-      setSyncStatus('disconnected','Save failed');
-      if (cb) cb();
-    }).finally(() => {
-      // Re-attach the listener after write is done
-      dbRef.on('value', snap => {
-        const d = snap.val();
-        merchants = d ? Object.keys(d).map(k=>({...d[k],_fbKey:k})) : [];
-        localStorage.setItem('mccrm_v5', JSON.stringify(merchants));
-        setSyncStatus('connected','Synced to Firebase');
-        render();
-      }, err => {
-        setSyncStatus('disconnected','Sync error');
-        merchants = JSON.parse(localStorage.getItem('mccrm_v5')||'[]');
-        render();
-      });
-    });
+    merchants.forEach(m => { const k = m._fbKey||String(m.id); const c={...m}; delete c._fbKey; obj[k]=c; });
+    dbRef.set(obj).then(()=>{setSyncStatus('connected','Synced');if(cb)cb();}).catch(()=>{setSyncStatus('disconnected','Save failed');if(cb)cb();});
   } else { if(cb)cb(); }
 }
 
@@ -904,18 +687,23 @@ function showPage(p) {
   document.querySelectorAll('[id^="nav-"]').forEach(x=>x.classList.remove('active'));
   document.getElementById('nav-'+p)?.classList.add('active');
   if (p==='branded-app') renderBrandedApp();
-  if (p==='credentials') renderCredPage();
 }
 
 // TABS
 function switchTab(id) {
-  document.querySelectorAll('.modal-tab').forEach((t,i)=>t.classList.toggle('active',['details','brandedapp','credentials','notesdocs'][i]===id));
+  document.querySelectorAll('.modal-tab').forEach((t,i)=>t.classList.toggle('active',['details','brandedapp','notesdocs'][i]===id));
   document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
   document.getElementById('tab-'+id)?.classList.add('active');
-  if (id === 'credentials') renderCredCardList();
 }
 
 // BADGE TOGGLE
+function toggleBadge(id, cls) {
+  const el = document.getElementById(id);
+  if(!el) return;
+  ['s-sent','s-approved','s-ios','s-android'].forEach(c=>el.classList.remove(c));
+  if(!el._wasActive) { el.classList.add(cls); el._wasActive=true; } else { el._wasActive=false; }
+}
+// Fixed toggle — use class check
 function toggleBadge(id, cls) {
   const el = document.getElementById(id);
   if(!el) return;
@@ -938,14 +726,6 @@ function setGroupFilter(g) {
   render();
 }
 
-function getEffectiveMonth(m) {
-  if (m.status === 'Live') {
-    return m.liveMonth || m.month || '';
-  } else {
-    return String(new Date().getMonth() + 1);
-  }
-}
-
 function getFiltered() {
   const q = (document.getElementById('search')?.value||'').toLowerCase();
   const gf = document.getElementById('filter-group')?.value||'';
@@ -955,7 +735,7 @@ function getFiltered() {
     const mq = !q || (m.merchantName||'').toLowerCase().includes(q)||(m.oldSoftware||'').toLowerCase().includes(q)||(m.website||'').toLowerCase().includes(q);
     const ms = activeStatusFilter==='All' || m.status===activeStatusFilter;
     const mg2 = !gf || m.group===gf;
-    const mm = !mf || getEffectiveMonth(m) === mf;
+    const mm = !mf || String(m.month)===mf;
     const ma = !af || m.assignee===af;
     return mq && ms && mg2 && mm && ma;
   });
@@ -1067,8 +847,8 @@ function renderBrandedApp() {
         <div class="app-row"><span class="app-row-label">Overall Status</span><span class="app-row-val" style="color:${stColor}">${st}</span></div>
         <div class="app-row"><span class="app-row-label">Screen</span><span class="app-row-val" style="font-size:11px">${ba.screenSent?'<span style="color:var(--amber)">Sent</span> ':''} ${ba.screenApproved?'<span style="color:var(--green)">Approved</span>':''} ${!ba.screenSent&&!ba.screenApproved?'<span style="color:var(--text3)">—</span>':''}</span></div>
         <div class="app-row"><span class="app-row-label">Dev Accounts</span><span class="app-row-val" style="font-size:11px">${ba.devIos?'<span style="color:var(--blue)">iOS</span> ':''} ${ba.devAndroid?'<span style="color:var(--teal)">Android</span>':''} ${!ba.devIos&&!ba.devAndroid?'<span style="color:var(--text3)">—</span>':''}</span></div>
-        <div class="app-row"><span class="app-row-label">iOS Link</span>${ba.iosLink?`<a href="${ba.iosLink}" target="_blank" class="app-link" onclick="event.stopPropagation()">${ba.iosLink.replace(/^https?:\/\//,'')}</a>`:'<span style="color:var(--text3);font-size:12px">—</span>'}</div>
-        <div class="app-row"><span class="app-row-label">Android Link</span>${ba.androidLink?`<a href="${ba.androidLink}" target="_blank" class="app-link" onclick="event.stopPropagation()">${ba.androidLink.replace(/^https?:\/\//,'')}</a>`:'<span style="color:var(--text3);font-size:12px">—</span>'}</div>
+        <div class="app-row"><span class="app-row-label">🍎 iOS Link</span>${ba.iosLink?`<a href="${ba.iosLink}" target="_blank" class="app-link" onclick="event.stopPropagation()">${ba.iosLink.replace(/^https?:\/\//,'')}</a>`:'<span style="color:var(--text3);font-size:12px">—</span>'}</div>
+        <div class="app-row"><span class="app-row-label">🤖 Android Link</span>${ba.androidLink?`<a href="${ba.androidLink}" target="_blank" class="app-link" onclick="event.stopPropagation()">${ba.androidLink.replace(/^https?:\/\//,'')}</a>`:'<span style="color:var(--text3);font-size:12px">—</span>'}</div>
         ${m.assignee?`<div class="app-row"><span class="app-row-label">Assigned To</span><span class="app-row-val">${m.assignee}</span></div>`:''}
       </div>
     </div>`;
@@ -1078,272 +858,22 @@ function renderBrandedApp() {
 // DOCS
 function addDoc(event, type) {
   const f = event.target.files[0]; if(!f) return;
-  const id = Date.now();
-  const reader = new FileReader();
-
-  if (type === 'img') {
-    reader.onload = e => {
-      pendingDocs.push({name:f.name, type, id, dataUrl:e.target.result});
-      renderDocList();
-    };
-    reader.readAsDataURL(f);
-  } else if (type === 'doc') {
-    reader.onload = e => {
-      const ab = e.target.result;
-      const bytes = new Uint8Array(ab);
-      let binary = '';
-      bytes.forEach(b => binary += String.fromCharCode(b));
-      const b64 = btoa(binary);
-      extractDocxText(ab).then(text => {
-        pendingDocs.push({name:f.name, type, id, b64, extractedText:text});
-        renderDocList();
-        if(text) {
-          const notesEl = document.getElementById('f-extraNotes');
-          if(notesEl && !notesEl.value.trim()) notesEl.value = text;
-          else if(notesEl && notesEl.value.trim()) notesEl.value += '\n\n--- ' + f.name + ' ---\n' + text;
-        }
-      });
-    };
-    reader.readAsArrayBuffer(f);
-  } else {
-    reader.onload = e => {
-      const ab = e.target.result;
-      const bytes = new Uint8Array(ab);
-      let binary = '';
-      bytes.forEach(b => binary += String.fromCharCode(b));
-      const b64 = btoa(binary);
-      pendingDocs.push({name:f.name, type, id, b64});
-      renderDocList();
-    };
-    reader.readAsArrayBuffer(f);
-  }
+  pendingDocs.push({name:f.name, type, id:Date.now()});
+  renderDocList();
   event.target.value='';
 }
-
-async function extractDocxText(arrayBuffer) {
-  try {
-    const bytes = new Uint8Array(arrayBuffer);
-    const decoder = new TextDecoder('utf-8', {fatal:false});
-    const raw = decoder.decode(bytes);
-    const xmlMatch = raw.match(/word\/document\.xml/);
-    if (!xmlMatch) return '';
-    let text = '';
-    const wtRegex = /<w:t[^>]*>([^<]*)<\/w:t>/g;
-    let m;
-    while((m = wtRegex.exec(raw)) !== null) {
-      text += m[1] + ' ';
-    }
-    return text.trim().substring(0, 5000);
-  } catch(e) {
-    return '';
-  }
-}
-
-function downloadDoc(id) {
-  const d = pendingDocs.find(x=>x.id===id);
-  if(!d) return;
-  if(d.dataUrl) {
-    const a = document.createElement('a');
-    a.href = d.dataUrl;
-    a.download = d.name;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    return;
-  }
-  if(d.b64) {
-    const binary = atob(d.b64);
-    const bytes = new Uint8Array(binary.length);
-    for(let i=0;i<binary.length;i++) bytes[i]=binary.charCodeAt(i);
-    const mimeMap = {doc:'application/vnd.openxmlformats-officedocument.wordprocessingml.document', pdf:'application/pdf', img:'image/png'};
-    const blob = new Blob([bytes], {type: mimeMap[d.type]||'application/octet-stream'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = d.name;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-  }
-}
-
 function renderDocList(docs) {
   const list = docs||pendingDocs;
   const c = document.getElementById('docList');
   if(!list.length){c.innerHTML='<div style="color:var(--text3);font-size:13px;padding:8px 0">No documents attached yet.</div>';return;}
-  const icons={doc:'[DOC]',pdf:'[PDF]',img:'[IMG]'};
-  const iconColors={doc:'var(--blue-bg)',pdf:'var(--red-bg)',img:'var(--green-bg)'};
+  const icons={doc:'📄',pdf:'📋',img:'🖼️'};
   c.innerHTML=list.map(d=>`<div class="doc-item">
-    <div class="doc-icon" style="background:${iconColors[d.type]||'var(--bg3)'}">
-      ${d.type==='img'&&d.dataUrl ? `<img src="${d.dataUrl}" style="width:32px;height:32px;object-fit:cover;border-radius:4px">` : `<span style="font-size:10px;font-weight:600;color:var(--text2);font-family:'DM Mono',monospace">${d.type.toUpperCase()}</span>`}
-    </div>
-    <div class="doc-meta">
-      <div class="doc-name">${d.name}</div>
-      <div class="doc-type">${d.extractedText ? 'Text extracted' : d.b64||d.dataUrl ? 'Ready to download' : 'Stored'}</div>
-    </div>
-    <button onclick="downloadDoc(${d.id})" title="Download" style="padding:4px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg3);color:var(--text2);cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;transition:all 0.15s;margin-right:4px" onmouseover="this.style.background='var(--accent-bg)';this.style.color='var(--accent2)'" onmouseout="this.style.background='var(--bg3)';this.style.color='var(--text2)'">Download</button>
-    <button class="doc-remove" onclick="removeDoc(${d.id})">x</button>
+    <div class="doc-icon">${icons[d.type]||'📎'}</div>
+    <div class="doc-meta"><div class="doc-name">${d.name}</div><div class="doc-type">${d.type.toUpperCase()}</div></div>
+    <button class="doc-remove" onclick="removeDoc(${d.id})">✕</button>
   </div>`).join('');
 }
 function removeDoc(id){pendingDocs=pendingDocs.filter(d=>d.id!==id);renderDocList();}
-
-// ─── CREDENTIALS ─────────────────────────────────────────────────────────────
-let dragSrcIdx = null;
-
-function togglePassVis(inputId, btn) {
-  const el = document.getElementById(inputId);
-  if (!el) return;
-  el.type = el.type === 'password' ? 'text' : 'password';
-  btn.textContent = el.type === 'password' ? '👁' : '🙈';
-}
-
-function addCredentialCard() {
-  pendingCredCards.push({ id: Date.now(), name: '', link: '', user: '', pass: '' });
-  renderCredCardList();
-}
-
-function removeCredCard(id) {
-  pendingCredCards = pendingCredCards.filter(c => c.id !== id);
-  renderCredCardList();
-}
-
-function renderCredCardList() {
-  const wrap = document.getElementById('credCardsWrap');
-  if (!wrap) return;
-  if (!pendingCredCards.length) {
-    wrap.innerHTML = '<div style="color:var(--text3);font-size:13px;padding:8px 0">No extra credentials yet. Click + Add above.</div>';
-    return;
-  }
-  wrap.innerHTML = pendingCredCards.map((c, i) => `
-    <div class="cred-extra-card" draggable="true"
-      ondragstart="credDragStart(event,${i})"
-      ondragover="credDragOver(event,${i})"
-      ondrop="credDrop(event,${i})"
-      ondragend="credDragEnd()"
-      id="cec-${c.id}">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-        <span style="color:var(--text3);cursor:grab;font-size:14px">⠿</span>
-        <input type="text" value="${escHtml(c.name)}" placeholder="Label (e.g. Client Portal)"
-          oninput="pendingCredCards[${i}].name=this.value"
-          style="flex:1;padding:5px 8px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif">
-        <button onclick="removeCredCard(${c.id})" style="padding:3px 7px;border-radius:5px;border:1px solid rgba(248,113,113,0.25);background:transparent;color:var(--red);cursor:pointer;font-size:12px" title="Remove">✕</button>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-        <div>
-          <div class="cred-label">Link / URL</div>
-          <input type="text" value="${escHtml(c.link)}" placeholder="https://…"
-            oninput="pendingCredCards[${i}].link=this.value"
-            style="width:100%;padding:5px 8px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--blue);font-size:12px;font-family:'DM Mono',monospace">
-        </div>
-        <div>
-          <div class="cred-label">Username / Email</div>
-          <input type="text" value="${escHtml(c.user)}" placeholder="user@example.com"
-            oninput="pendingCredCards[${i}].user=this.value"
-            style="width:100%;padding:5px 8px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:12px;font-family:'DM Mono',monospace">
-        </div>
-        <div style="grid-column:1/-1">
-          <div class="cred-label">Password</div>
-          <div style="position:relative">
-            <input type="password" value="${escHtml(c.pass)}" placeholder="Password"
-              oninput="pendingCredCards[${i}].pass=this.value"
-              style="width:100%;padding:5px 32px 5px 8px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:12px;font-family:'DM Mono',monospace"
-              id="ccp-${c.id}">
-            <button type="button" onclick="togglePassVis('ccp-${c.id}',this)"
-              style="position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text3);cursor:pointer;font-size:12px;padding:0">👁</button>
-          </div>
-        </div>
-      </div>
-    </div>`).join('');
-}
-
-function credDragStart(e, i) { dragSrcIdx = i; e.dataTransfer.effectAllowed = 'move'; }
-function credDragOver(e, i) {
-  e.preventDefault(); e.dataTransfer.dropEffect = 'move';
-  document.querySelectorAll('.cred-extra-card').forEach((el,j) => el.classList.toggle('drag-over', j === i && i !== dragSrcIdx));
-}
-function credDrop(e, i) {
-  e.preventDefault();
-  if (dragSrcIdx === null || dragSrcIdx === i) return;
-  const moved = pendingCredCards.splice(dragSrcIdx, 1)[0];
-  pendingCredCards.splice(i, 0, moved);
-  dragSrcIdx = null;
-  renderCredCardList();
-}
-function credDragEnd() {
-  dragSrcIdx = null;
-  document.querySelectorAll('.cred-extra-card').forEach(el => el.classList.remove('drag-over'));
-}
-
-function escHtml(s) {
-  return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-function copyToClipboard(text, btn) {
-  navigator.clipboard.writeText(text).then(() => {
-    const orig = btn.textContent;
-    btn.textContent = '✓';
-    btn.style.color = 'var(--green)';
-    setTimeout(() => { btn.textContent = orig; btn.style.color = ''; }, 1500);
-  });
-}
-
-// ─── CREDENTIALS PAGE ────────────────────────────────────────────────────────
-function renderCredPage() {
-  const q = (document.getElementById('cred-search')?.value||'').toLowerCase();
-  const grid = document.getElementById('credPageGrid');
-  if (!grid) return;
-
-  const list = merchants.filter(m =>
-    (m.ghlUrl||m.ghlUser||m.ghlPass||(m.credCards||[]).length) &&
-    (!q || (m.merchantName||'').toLowerCase().includes(q))
-  );
-
-  if (!list.length) {
-    grid.innerHTML = '<div style="grid-column:1/-1"><div class="empty"><h3>No credentials stored</h3><p>Open a merchant and add credentials in the Credentials tab.</p></div></div>';
-    return;
-  }
-
-  grid.innerHTML = list.map(m => {
-    const cards = (m.credCards||[]);
-    const extraCards = cards.map(c => `
-      <div style="margin-top:10px;padding:10px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px">
-        <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:6px">${escHtml(c.name)||'Extra'}</div>
-        ${c.link ? `<div class="cred-row"><div class="cred-label">Link</div><div class="cred-val"><a href="${escHtml(c.link)}" target="_blank" class="cred-link" onclick="event.stopPropagation()">${escHtml(c.link).replace(/^https?:\/\//,'').substring(0,40)}</a><button class="cred-copy" onclick="event.stopPropagation();copyToClipboard('${escHtml(c.link)}',this)">copy</button></div></div>` : ''}
-        ${c.user ? `<div class="cred-row"><div class="cred-label">Username</div><div class="cred-val"><span>${escHtml(c.user)}</span><button class="cred-copy" onclick="event.stopPropagation();copyToClipboard('${escHtml(c.user)}',this)">copy</button></div></div>` : ''}
-        ${c.pass ? `<div class="cred-row"><div class="cred-label">Password</div><div class="cred-val"><span id="cpv-${m.id}-${c.id}" style="font-family:'DM Mono',monospace">••••••••</span><button class="cred-copy" onclick="event.stopPropagation();revealCredPass('cpv-${m.id}-${c.id}','${escHtml(c.pass)}',this)">show</button><button class="cred-copy" onclick="event.stopPropagation();copyToClipboard('${escHtml(c.pass)}',this)">copy</button></div></div>` : ''}
-      </div>`).join('');
-
-    return `<div class="cred-card" onclick="openModal(${m.id});switchTab('credentials')">
-      <div class="cred-card-header">
-        <div class="cred-card-title">${escHtml(m.merchantName||'Unnamed')}</div>
-        <span style="font-size:11px;color:var(--text3)">${cards.length} extra</span>
-      </div>
-      <div class="cred-card-body">
-        ${m.ghlUrl ? `<div class="cred-row"><div class="cred-label">GHL URL</div><div class="cred-val"><a href="${escHtml(m.ghlUrl)}" target="_blank" class="cred-link" onclick="event.stopPropagation()">${escHtml(m.ghlUrl).replace(/^https?:\/\//,'').substring(0,38)}</a><button class="cred-copy" onclick="event.stopPropagation();copyToClipboard('${escHtml(m.ghlUrl)}',this)">copy</button></div></div>` : ''}
-        ${m.ghlUser ? `<div class="cred-row"><div class="cred-label">Username</div><div class="cred-val"><span>${escHtml(m.ghlUser)}</span><button class="cred-copy" onclick="event.stopPropagation();copyToClipboard('${escHtml(m.ghlUser)}',this)">copy</button></div></div>` : ''}
-        ${m.ghlPass ? `<div class="cred-row"><div class="cred-label">Password</div><div class="cred-val"><span id="gpv-${m.id}" style="font-family:'DM Mono',monospace">••••••••</span><button class="cred-copy" onclick="event.stopPropagation();revealCredPass('gpv-${m.id}','${escHtml(m.ghlPass)}',this)">show</button><button class="cred-copy" onclick="event.stopPropagation();copyToClipboard('${escHtml(m.ghlPass)}',this)">copy</button></div></div>` : ''}
-        ${extraCards}
-        <div style="margin-top:4px">
-          <button class="btn btn-ghost" style="width:100%;font-size:12px;justify-content:center" onclick="event.stopPropagation();openModal(${m.id});switchTab('credentials')">Edit Credentials</button>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function revealCredPass(spanId, pass, btn) {
-  const el = document.getElementById(spanId);
-  if (!el) return;
-  if (el.textContent === '••••••••') {
-    el.textContent = pass;
-    btn.textContent = 'hide';
-  } else {
-    el.textContent = '••••••••';
-    btn.textContent = 'show';
-  }
-}
-
 
 // MODAL
 function openModal(id) {
@@ -1389,16 +919,11 @@ function openModal(id) {
   document.getElementById('ba-ios-link').value=ba.iosLink||'';
   document.getElementById('ba-android-link').value=ba.androidLink||'';
 
-  document.getElementById('f-ghlUrl').value = m?.ghlUrl||'';
-  document.getElementById('f-ghlUser').value = m?.ghlUser||'';
-  document.getElementById('f-ghlPass').value = m?.ghlPass||'';
-  pendingCredCards = m ? JSON.parse(JSON.stringify(m.credCards||[])) : [];
-
   renderDocList(pendingDocs);
   document.getElementById('overlay').classList.add('open');
 }
 
-function closeModal(){document.getElementById('overlay').classList.remove('open');editingId=null;pendingDocs=[];pendingCredCards=[];}
+function closeModal(){document.getElementById('overlay').classList.remove('open');editingId=null;pendingDocs=[];}
 function overlayClick(e){if(e.target===document.getElementById('overlay'))closeModal();}
 
 function saveMerchant() {
@@ -1422,10 +947,6 @@ function saveMerchant() {
     statusOfWork:document.getElementById('f-statusOfWork').value.trim(),
     extraNotes:document.getElementById('f-extraNotes').value.trim(),
     modules, docs:pendingDocs,
-    ghlUrl: document.getElementById('f-ghlUrl').value.trim(),
-    ghlUser: document.getElementById('f-ghlUser').value.trim(),
-    ghlPass: document.getElementById('f-ghlPass').value.trim(),
-    credCards: pendingCredCards,
     brandedApp:{
       screenSent:document.getElementById('ba-screen-sent').classList.contains('s-sent'),
       screenApproved:document.getElementById('ba-screen-approved').classList.contains('s-approved'),
@@ -1439,24 +960,9 @@ function saveMerchant() {
       androidLink:document.getElementById('ba-android-link').value.trim(),
     }
   };
-  if(editingId){
-    const i=merchants.findIndex(x=>x.id===editingId);
-    if(i>=0){
-      const prev=merchants[i];
-      if(data.status==='Live' && prev.status!=='Live'){
-        data.liveMonth=data.month||String(new Date().getMonth()+1);
-      } else if(data.status!=='Live'){
-        data.liveMonth='';
-      } else {
-        data.liveMonth=prev.liveMonth||data.month||'';
-      }
-      merchants[i]={...prev,...data};
-    }
-  } else {
-    if(data.status==='Live') data.liveMonth=data.month||String(new Date().getMonth()+1);
-    merchants.unshift({id:Date.now(),...data});
-  }
-  saveData(()=>{render();if(currentPage==='branded-app')renderBrandedApp();if(currentPage==='credentials')renderCredPage();closeModal();});
+  if(editingId){const i=merchants.findIndex(x=>x.id===editingId);if(i>=0)merchants[i]={...merchants[i],...data};}
+  else{merchants.unshift({id:Date.now(),...data});}
+  saveData(()=>{render();if(currentPage==='branded-app')renderBrandedApp();closeModal();});
 }
 
 function deleteCurrent(){if(!editingId||!confirm('Delete this merchant?'))return;merchants=merchants.filter(x=>x.id!==editingId);saveData(()=>{render();closeModal();});}
@@ -1470,806 +976,9 @@ function exportCSV(){
   const csv=[h,...rows].map(r=>r.map(c=>`"${(c+'').replace(/"/g,'""')}"`).join(',')).join('\n');
   const b=new Blob([csv],{type:'text/csv'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download='merchants-'+new Date().toISOString().slice(0,10)+'.csv';a.click();URL.revokeObjectURL(u);
 }
-function importData(event){
-  const f=event.target.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=e=>{
-    const text=e.target.result;
-    // Try JSON first
-    if(f.name.toLowerCase().endsWith('.json')||text.trimStart().startsWith('[')||text.trimStart().startsWith('{')){
-      try{
-        const d=JSON.parse(text);
-        if(!Array.isArray(d))throw new Error('Not an array');
-        if(!confirm(`Import ${d.length} merchants? This will replace current data.`))return;
-        merchants=d;saveData(()=>{render();if(currentPage==='credentials')renderCredPage();});return;
-      }catch(err){/* fall through to CSV */}
-    }
-    // Try CSV
-    try{
-      const lines=text.split('\n').map(l=>l.trim()).filter(l=>l);
-      if(lines.length<2)throw new Error('Empty CSV');
-      // Parse a CSV line respecting quoted fields
-      function parseCSVLine(line){
-        const result=[];let cur='';let inQ=false;
-        for(let i=0;i<line.length;i++){
-          const c=line[i];
-          if(c==='"'){if(inQ&&line[i+1]==='"'){cur+='"';i++;}else{inQ=!inQ;}}
-          else if(c===','&&!inQ){result.push(cur);cur='';}
-          else{cur+=c;}
-        }
-        result.push(cur);
-        return result;
-      }
-      const headers=parseCSVLine(lines[0]).map(h=>h.toLowerCase().trim());
-      // Map header names to merchant fields
-      const fieldMap={
-        'status':'status','merchant':'merchantName','group':'group',
-        'assigned to':'assignee','month':'monthName','tz':'timezone',
-        'old software':'oldSoftware','website':'website',
-        'data mig':'dataMigration','payment mig':'paymentMigration',
-        'widget':'widgetCustomization','website int':'websiteIntegration',
-        'access control':'accessControl','onboarding':'onboardingStatus',
-        'modules':'modulesStr','comments':'comments','status of work':'statusOfWork',
-        'ios link':'iosLink','android link':'androidLink',
-        // credentials columns (if present in a custom export)
-        'ghl url':'ghlUrl','ghl user':'ghlUser','ghl username':'ghlUser',
-        'ghl pass':'ghlPass','ghl password':'ghlPass'
-      };
-      const monthNameToNum={'january':'1','february':'2','march':'3','april':'4','may':'5','june':'6','july':'7','august':'8','september':'9','october':'10','november':'11','december':'12'};
-      const d=lines.slice(1).map((line,idx)=>{
-        const cols=parseCSVLine(line);
-        const obj={id:Date.now()+idx,docs:[],credCards:[],brandedApp:{}};
-        headers.forEach((h,i)=>{
-          const field=fieldMap[h];
-          if(!field)return;
-          const val=cols[i]||'';
-          if(field==='monthName'){
-            obj.month=monthNameToNum[val.toLowerCase()]||'';
-          } else if(field==='modulesStr'){
-            obj.modules=val?val.split(',').map(s=>s.trim()).filter(Boolean):[];
-          } else if(field==='iosLink'){
-            obj.brandedApp=obj.brandedApp||{};obj.brandedApp.iosLink=val;
-          } else if(field==='androidLink'){
-            obj.brandedApp=obj.brandedApp||{};obj.brandedApp.androidLink=val;
-          } else {
-            obj[field]=val;
-          }
-        });
-        return obj;
-      }).filter(o=>o.merchantName||o.status);
-      if(!d.length)throw new Error('No valid rows');
-      if(!confirm(`Import ${d.length} merchants from CSV? This will replace current data.`))return;
-      merchants=d;saveData(()=>{render();if(currentPage==='credentials')renderCredPage();});
-    }catch(err){
-      alert('Could not import file. Please use a JSON backup or the exported CSV from this app.');
-    }
-  };
-  r.readAsText(f);event.target.value='';
-}
-
-// REPORT MODAL
-function openReportModal() {
-  // Set current month as default
-  const cur = new Date().getMonth() + 1;
-  document.getElementById('rpt-month').value = String(cur);
-  document.getElementById('rptOverlay').classList.add('open');
-}
-function closeReportModal() { document.getElementById('rptOverlay').classList.remove('open'); }
-
-// Get merchants for a given month (0 = all)
-function getMerchantsForMonth(monthVal) {
-  if (!monthVal || monthVal === '0') return merchants;
-  return merchants.filter(m => getEffectiveMonth(m) === String(monthVal));
-}
-
-// ─── PDF GENERATION ───────────────────────────────────────────────────────────
-function generateReport(type, format) {
-  const monthVal = document.getElementById('rpt-month').value;
-  const monthName = monthVal === '0' ? 'All Months' : MONTHS[parseInt(monthVal)] || 'All Months';
-  const list = getMerchantsForMonth(monthVal);
-  const dateStr = new Date().toLocaleDateString('en-ZA', {day:'2-digit',month:'long',year:'numeric'});
-
-  if (format === 'pdf') {
-    generatePDF(type, list, monthName, dateStr);
-  } else {
-    generateDOCX(type, list, monthName, dateStr);
-  }
-}
-
-function generatePDF(type, list, monthName, dateStr) {
-  const html = type === 'client'
-    ? buildClientReportHTML(list, monthName, dateStr)
-    : buildInternalReportHTML(list, monthName, dateStr);
-
-  const win = window.open('', '_blank');
-  if (!win) { alert('Please allow pop-ups to download PDF reports.'); return; }
-  win.document.write(html);
-  win.document.close();
-  win.onload = function() {
-    setTimeout(() => { win.focus(); win.print(); }, 500);
-  };
-}
-
-function statusColor(s) {
-  if (s === 'Live') return '#4ade80';
-  if (s === 'In Progress') return '#60a5fa';
-  if (s === 'Paused') return '#fbbf24';
-  if (s === 'Cancelled') return '#f87171';
-  return '#888';
-}
-
-function buildClientReportHTML(list, monthName, dateStr) {
-  const rows = list.map(m => {
-    const mods = (m.modules||[]);
-    const modsDone = mods.length;
-    const modsTotal = MODULES.length;
-    const pct = Math.round(modsDone / modsTotal * 100);
-    const remaining = MODULES.filter(mod => !mods.includes(mod));
-
-    const ba = m.brandedApp || {};
-    let appStatus = 'Not started';
-    if (ba.pubIos || ba.pubAndroid) appStatus = 'Published';
-    else if (ba.screenApproved) appStatus = 'Screen Approved';
-    else if (ba.screenSent) appStatus = 'Screen Sent';
-
-    const progressBar = `<div style="height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden;margin:4px 0"><div style="height:100%;width:${pct}%;background:#4f46e5;border-radius:4px"></div></div>`;
-
-    return `
-      <div style="page-break-inside:avoid;border:1px solid #e5e7eb;border-radius:8px;padding:20px;margin-bottom:16px">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
-          <div>
-            <h2 style="font-size:16px;font-weight:700;color:#111827;margin:0 0 4px">${m.merchantName || 'Unnamed Merchant'}</h2>
-            ${m.website ? `<div style="font-size:12px;color:#6b7280">${m.website}</div>` : ''}
-            ${m.group ? `<div style="font-size:12px;color:#6b7280;margin-top:2px">${m.group}</div>` : ''}
-          </div>
-          <span style="font-size:12px;font-weight:600;padding:4px 12px;border-radius:99px;background:${statusColor(m.status)}20;color:${statusColor(m.status)};border:1px solid ${statusColor(m.status)}50">${m.status || '—'}</span>
-        </div>
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
-          <div style="background:#f9fafb;border-radius:6px;padding:10px">
-            <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:#6b7280;margin-bottom:6px">Onboarding Progress</div>
-            <div style="font-size:22px;font-weight:700;color:#111827">${pct}%</div>
-            ${progressBar}
-            <div style="font-size:12px;color:#6b7280">${modsDone} of ${modsTotal} modules covered</div>
-          </div>
-          <div style="background:#f9fafb;border-radius:6px;padding:10px">
-            <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:#6b7280;margin-bottom:6px">Onboarding Session</div>
-            <div style="font-size:14px;font-weight:600;color:#111827">${m.onboardingStatus || 'Not started'}</div>
-            <div style="margin-top:4px;font-size:12px;color:#6b7280">Data Migration: <strong>${m.dataMigration || 'None'}</strong></div>
-            <div style="font-size:12px;color:#6b7280">Branded App: <strong>${appStatus}</strong></div>
-          </div>
-        </div>
-
-        ${mods.length ? `
-        <div style="margin-bottom:10px">
-          <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:#6b7280;margin-bottom:6px">✅ Modules Completed (${modsDone})</div>
-          <div style="display:flex;flex-wrap:wrap;gap:4px">${mods.map(mod=>`<span style="font-size:11px;background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:99px">${mod}</span>`).join('')}</div>
-        </div>` : ''}
-
-        ${remaining.length ? `
-        <div style="margin-bottom:10px">
-          <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:#6b7280;margin-bottom:6px">⏳ Modules Still to Cover (${remaining.length})</div>
-          <div style="display:flex;flex-wrap:wrap;gap:4px">${remaining.map(mod=>`<span style="font-size:11px;background:#fef3c7;color:#92400e;padding:2px 8px;border-radius:99px">${mod}</span>`).join('')}</div>
-        </div>` : ''}
-
-        ${m.comments ? `<div style="background:#eff6ff;border-left:3px solid #3b82f6;padding:8px 12px;border-radius:0 6px 6px 0;margin-top:8px"><div style="font-size:10px;font-weight:600;color:#1d4ed8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px">Notes from your specialist</div><div style="font-size:12px;color:#1e3a5f">${m.comments}</div></div>` : ''}
-        ${m.statusOfWork ? `<div style="background:#f0fdf4;border-left:3px solid #22c55e;padding:8px 12px;border-radius:0 6px 6px 0;margin-top:8px"><div style="font-size:10px;font-weight:600;color:#15803d;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px">Current Status of Work</div><div style="font-size:12px;color:#14532d">${m.statusOfWork}</div></div>` : ''}
-      </div>`;
-  }).join('');
-
-  return `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Client Onboarding Report — ${monthName}</title>
-  <style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Segoe UI',Arial,sans-serif;background:#fff;color:#111827;padding:32px;max-width:800px;margin:0 auto}@media print{body{padding:16px}}</style>
-  </head><body>
-  <div style="text-align:center;margin-bottom:32px;padding-bottom:24px;border-bottom:2px solid #e5e7eb">
-    <div style="font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:#6b7280;margin-bottom:8px">Merchant Onboarding CRM</div>
-    <h1 style="font-size:26px;font-weight:800;color:#111827;margin-bottom:6px">Your Onboarding Report</h1>
-    <div style="font-size:14px;color:#6b7280">Period: <strong>${monthName}</strong> &nbsp;|&nbsp; Generated: ${dateStr}</div>
-    <div style="font-size:13px;color:#6b7280;margin-top:4px">${list.length} merchant${list.length !== 1 ? 's' : ''} included in this report</div>
-  </div>
-  ${list.length === 0 ? '<p style="text-align:center;color:#6b7280;padding:40px">No merchants found for this period.</p>' : rows}
-  <div style="text-align:center;margin-top:32px;padding-top:16px;border-top:1px solid #e5e7eb;font-size:11px;color:#9ca3af">This report was generated by Merchant Onboarding CRM &bull; ${dateStr}</div>
-  </body></html>`;
-}
-
-function buildInternalReportHTML(list, monthName, dateStr) {
-  // Group by assignee
-  const byAssignee = {};
-  list.forEach(m => {
-    const key = m.assignee || 'Unassigned';
-    if (!byAssignee[key]) byAssignee[key] = [];
-    byAssignee[key].push(m);
-  });
-
-  const summary = `
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px">
-      ${['In Progress','Live','Paused','Cancelled'].map(s => {
-        const cnt = list.filter(m => m.status === s).length;
-        return `<div style="text-align:center;background:#f9fafb;border-radius:8px;padding:12px;border:1px solid #e5e7eb">
-          <div style="font-size:22px;font-weight:700;color:${statusColor(s)}">${cnt}</div>
-          <div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:0.04em;margin-top:2px">${s}</div>
-        </div>`;
-      }).join('')}
-    </div>`;
-
-  const operatorSections = Object.entries(byAssignee).sort(([a],[b])=>a.localeCompare(b)).map(([name, ms]) => {
-    const liveCount = ms.filter(m=>m.status==='Live').length;
-    const ipCount = ms.filter(m=>m.status==='In Progress').length;
-    const avgPct = ms.length ? Math.round(ms.reduce((acc,m)=>acc+Math.round((m.modules||[]).length/MODULES.length*100),0)/ms.length) : 0;
-
-    const clientRows = ms.map(m => {
-      const mods = (m.modules||[]).length;
-      const pct = Math.round(mods/MODULES.length*100);
-      return `<tr>
-        <td style="padding:8px 10px;font-weight:600;color:#111827;font-size:13px">${m.merchantName||'—'}</td>
-        <td style="padding:8px 10px;font-size:12px"><span style="color:${statusColor(m.status)};font-weight:600">${m.status||'—'}</span></td>
-        <td style="padding:8px 10px;font-size:12px;color:#6b7280">${m.group||'—'}</td>
-        <td style="padding:8px 10px;font-size:12px;color:#374151">${m.onboardingStatus||'Not started'}</td>
-        <td style="padding:8px 10px;font-size:12px;color:#374151">${m.dataMigration||'None'}</td>
-        <td style="padding:8px 10px;font-size:12px"><span style="font-weight:600;color:${pct>=80?'#059669':pct>=50?'#d97706':'#dc2626'}">${pct}%</span> <span style="color:#9ca3af">(${mods}/${MODULES.length})</span></td>
-        <td style="padding:8px 10px;font-size:11px;color:#6b7280;max-width:160px">${m.comments||'—'}</td>
-      </tr>`;
-    }).join('');
-
-    return `
-      <div style="page-break-inside:avoid;margin-bottom:24px;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden">
-        <div style="background:#f9fafb;padding:14px 18px;border-bottom:1px solid #e5e7eb;display:flex;justify-content:space-between;align-items:center">
-          <div>
-            <div style="font-size:16px;font-weight:700;color:#111827">${name}</div>
-            <div style="font-size:12px;color:#6b7280;margin-top:2px">${ms.length} client${ms.length!==1?'s':''} this period</div>
-          </div>
-          <div style="display:flex;gap:12px">
-            <div style="text-align:center"><div style="font-size:16px;font-weight:700;color:#4ade80">${liveCount}</div><div style="font-size:10px;color:#6b7280">Live</div></div>
-            <div style="text-align:center"><div style="font-size:16px;font-weight:700;color:#60a5fa">${ipCount}</div><div style="font-size:10px;color:#6b7280">In Progress</div></div>
-            <div style="text-align:center"><div style="font-size:16px;font-weight:700;color:#8b5cf6">${avgPct}%</div><div style="font-size:10px;color:#6b7280">Avg Progress</div></div>
-          </div>
-        </div>
-        <div style="overflow-x:auto">
-          <table style="width:100%;border-collapse:collapse;font-family:'Segoe UI',Arial,sans-serif">
-            <thead>
-              <tr style="background:#f3f4f6;border-bottom:1px solid #e5e7eb">
-                <th style="padding:8px 10px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:#6b7280;text-align:left">Client</th>
-                <th style="padding:8px 10px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:#6b7280;text-align:left">Status</th>
-                <th style="padding:8px 10px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:#6b7280;text-align:left">Group</th>
-                <th style="padding:8px 10px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:#6b7280;text-align:left">Onboarding Stage</th>
-                <th style="padding:8px 10px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:#6b7280;text-align:left">Data Mig.</th>
-                <th style="padding:8px 10px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:#6b7280;text-align:left">Progress</th>
-                <th style="padding:8px 10px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:#6b7280;text-align:left">Notes</th>
-              </tr>
-            </thead>
-            <tbody>${clientRows}</tbody>
-          </table>
-        </div>
-      </div>`;
-  }).join('');
-
-  return `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Internal Team Report — ${monthName}</title>
-  <style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Segoe UI',Arial,sans-serif;background:#fff;color:#111827;padding:32px;max-width:900px;margin:0 auto}@media print{body{padding:16px}tr:nth-child(even){background:#f9fafb}}</style>
-  </head><body>
-  <div style="margin-bottom:28px;padding-bottom:20px;border-bottom:2px solid #e5e7eb">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start">
-      <div>
-        <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:#6b7280;margin-bottom:6px">INTERNAL USE ONLY — Merchant Onboarding CRM</div>
-        <h1 style="font-size:24px;font-weight:800;color:#111827;margin-bottom:4px">Team Performance Report</h1>
-        <div style="font-size:13px;color:#6b7280">Period: <strong>${monthName}</strong> &nbsp;|&nbsp; Generated: ${dateStr}</div>
-      </div>
-      <div style="text-align:right">
-        <div style="font-size:28px;font-weight:800;color:#4f46e5">${list.length}</div>
-        <div style="font-size:11px;color:#6b7280">Total Clients</div>
-      </div>
-    </div>
-  </div>
-  ${summary}
-  ${Object.keys(byAssignee).length === 0 ? '<p style="text-align:center;color:#6b7280;padding:40px">No merchants found for this period.</p>' : operatorSections}
-  <div style="text-align:center;margin-top:32px;padding-top:16px;border-top:1px solid #e5e7eb;font-size:11px;color:#9ca3af;font-style:italic">CONFIDENTIAL — Internal Use Only &bull; Merchant Onboarding CRM &bull; ${dateStr}</div>
-  </body></html>`;
-}
-
-// ─── DOCX GENERATION ──────────────────────────────────────────────────────────
-function generateDOCX(type, list, monthName, dateStr) {
-  const content = type === 'client'
-    ? buildClientDocxContent(list, monthName, dateStr)
-    : buildInternalDocxContent(list, monthName, dateStr);
-
-  const docxXml = wrapDocx(content);
-  const filename = type === 'client'
-    ? `Client-Onboarding-Report-${monthName.replace(/\s/g,'-')}-${new Date().toISOString().slice(0,10)}.docx`
-    : `Internal-Team-Report-${monthName.replace(/\s/g,'-')}-${new Date().toISOString().slice(0,10)}.docx`;
-
-  downloadDocxBlob(docxXml, filename);
-}
-
-function para(text, opts = {}) {
-  const { bold = false, size = 22, color = '111827', spacing = 120, indent = 0, italic = false } = opts;
-  const rPr = `<w:rPr>${bold?'<w:b/>':''}${italic?'<w:i/>':''}<w:sz w:val="${size}"/><w:color w:val="${color}"/></w:rPr>`;
-  const pPr = `<w:pPr><w:spacing w:after="${spacing}"/>${indent?`<w:ind w:left="${indent}"/>`:''}
-    <w:rPr><w:sz w:val="${size}"/></w:rPr></w:pPr>`;
-  const escaped = String(text).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  return `<w:p>${pPr}<w:r>${rPr}<w:t xml:space="preserve">${escaped}</w:t></w:r></w:p>`;
-}
-
-function heading1(text) { return para(text, { bold: true, size: 32, color: '111827', spacing: 160 }); }
-function heading2(text) { return para(text, { bold: true, size: 26, color: '1e40af', spacing: 120 }); }
-function heading3(text) { return para(text, { bold: true, size: 22, color: '374151', spacing: 100 }); }
-function subtext(text) { return para(text, { size: 18, color: '6b7280', spacing: 80 }); }
-function bodytext(text) { return para(text, { size: 20, color: '374151', spacing: 100 }); }
-function labelval(label, val) {
-  const lEsc = String(label).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  const vEsc = String(val || '—').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  return `<w:p><w:pPr><w:spacing w:after="80"/></w:pPr>
-    <w:r><w:rPr><w:b/><w:sz w:val="20"/><w:color w:val="374151"/></w:rPr><w:t xml:space="preserve">${lEsc}: </w:t></w:r>
-    <w:r><w:rPr><w:sz w:val="20"/><w:color w:val="4b5563"/></w:rPr><w:t xml:space="preserve">${vEsc}</w:t></w:r>
-  </w:p>`;
-}
-function divider() {
-  return `<w:p><w:pPr><w:pBdr><w:bottom w:val="single" w:sz="4" w:space="1" w:color="e5e7eb"/></w:pBdr><w:spacing w:after="160"/></w:pPr></w:p>`;
-}
-function spacer() { return `<w:p><w:pPr><w:spacing w:after="80"/></w:pPr></w:p>`; }
-
-function buildClientDocxContent(list, monthName, dateStr) {
-  let xml = '';
-  xml += heading1('Your Onboarding Report');
-  xml += subtext(`Period: ${monthName}   |   Generated: ${dateStr}   |   ${list.length} merchant(s) included`);
-  xml += divider();
-
-  if (list.length === 0) {
-    xml += bodytext('No merchants found for this period.');
-    return xml;
-  }
-
-  list.forEach(m => {
-    const mods = m.modules || [];
-    const pct = Math.round(mods.length / MODULES.length * 100);
-    const remaining = MODULES.filter(mod => !mods.includes(mod));
-    const ba = m.brandedApp || {};
-    let appStatus = 'Not started';
-    if (ba.pubIos || ba.pubAndroid) appStatus = 'Published';
-    else if (ba.screenApproved) appStatus = 'Screen Approved';
-    else if (ba.screenSent) appStatus = 'Screen Sent';
-
-    xml += heading2(m.merchantName || 'Unnamed Merchant');
-    if (m.website) xml += subtext(`Website: ${m.website}`);
-    if (m.group) xml += subtext(`Group: ${m.group}`);
-    xml += spacer();
-    xml += heading3('Current Status');
-    xml += labelval('Overall Status', m.status);
-    xml += labelval('Onboarding Stage', m.onboardingStatus || 'Not started');
-    xml += labelval('Data Migration', m.dataMigration || 'None');
-    xml += labelval('Payment Migration', m.paymentMigration || 'None');
-    xml += labelval('Widget Customization', m.widgetCustomization || 'None');
-    xml += labelval('Website Integration', m.websiteIntegration || 'None');
-    xml += labelval('Access Control', m.accessControl || 'None');
-    xml += labelval('Branded App Status', appStatus);
-    xml += spacer();
-    xml += heading3(`Onboarding Progress — ${pct}% Complete`);
-    xml += labelval('Modules Completed', `${mods.length} of ${MODULES.length}`);
-    if (mods.length) xml += bodytext('Completed: ' + mods.join(', '));
-    if (remaining.length) xml += bodytext('Still to cover: ' + remaining.join(', '));
-    xml += spacer();
-    if (m.comments) {
-      xml += heading3('Notes from Your Specialist');
-      xml += bodytext(m.comments);
-      xml += spacer();
-    }
-    if (m.statusOfWork) {
-      xml += heading3('Current Status of Work');
-      xml += bodytext(m.statusOfWork);
-      xml += spacer();
-    }
-    if (m.extraNotes) {
-      xml += heading3('Additional Notes');
-      xml += bodytext(m.extraNotes);
-      xml += spacer();
-    }
-    xml += divider();
-  });
-
-  xml += spacer();
-  xml += subtext('This report was generated by Merchant Onboarding CRM.');
-  return xml;
-}
-
-function buildInternalDocxContent(list, monthName, dateStr) {
-  const byAssignee = {};
-  list.forEach(m => {
-    const key = m.assignee || 'Unassigned';
-    if (!byAssignee[key]) byAssignee[key] = [];
-    byAssignee[key].push(m);
-  });
-
-  let xml = '';
-  xml += heading1('Team Performance Report');
-  xml += subtext(`INTERNAL USE ONLY   |   Period: ${monthName}   |   Generated: ${dateStr}`);
-  xml += divider();
-
-  // Summary
-  const live = list.filter(m=>m.status==='Live').length;
-  const ip = list.filter(m=>m.status==='In Progress').length;
-  const paused = list.filter(m=>m.status==='Paused').length;
-  const cancelled = list.filter(m=>m.status==='Cancelled').length;
-  xml += heading3('Overall Summary');
-  xml += labelval('Total Clients', list.length);
-  xml += labelval('Live', live);
-  xml += labelval('In Progress', ip);
-  xml += labelval('Paused', paused);
-  xml += labelval('Cancelled', cancelled);
-  xml += divider();
-
-  if (list.length === 0) {
-    xml += bodytext('No merchants found for this period.');
-    return xml;
-  }
-
-  Object.entries(byAssignee).sort(([a],[b])=>a.localeCompare(b)).forEach(([name, ms]) => {
-    const avgPct = ms.length ? Math.round(ms.reduce((acc,m)=>acc+Math.round((m.modules||[]).length/MODULES.length*100),0)/ms.length) : 0;
-    const liveC = ms.filter(m=>m.status==='Live').length;
-    const ipC = ms.filter(m=>m.status==='In Progress').length;
-
-    xml += heading2(`Operator / Specialist: ${name}`);
-    xml += bodytext(`Clients this period: ${ms.length}   |   Live: ${liveC}   |   In Progress: ${ipC}   |   Avg Progress: ${avgPct}%`);
-    xml += spacer();
-
-    ms.forEach(m => {
-      const mods = m.modules || [];
-      const pct = Math.round(mods.length / MODULES.length * 100);
-      xml += heading3(m.merchantName || 'Unnamed');
-      xml += labelval('Status', m.status);
-      xml += labelval('Group', m.group || '—');
-      xml += labelval('Onboarding Stage', m.onboardingStatus || 'Not started');
-      xml += labelval('Data Migration', m.dataMigration || 'None');
-      xml += labelval('Modules Covered', `${mods.length}/${MODULES.length} (${pct}%)`);
-      if (mods.length) xml += labelval('Modules Done', mods.join(', '));
-      if (m.comments) xml += labelval('Notes', m.comments);
-      if (m.statusOfWork) xml += labelval('Status of Work', m.statusOfWork);
-      xml += spacer();
-    });
-    xml += divider();
-  });
-
-  xml += spacer();
-  xml += subtext('CONFIDENTIAL — Internal Use Only. Merchant Onboarding CRM.');
-  return xml;
-}
-
-function wrapDocx(bodyContent) {
-  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas"
-  xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
-  xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
-<w:body>
-<w:sectPr>
-  <w:pgSz w:w="12240" w:h="15840"/>
-  <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440"/>
-</w:sectPr>
-${bodyContent}
-</w:body>
-</w:document>`;
-}
-
-function downloadDocxBlob(xmlContent, filename) {
-  // Build a minimal valid DOCX (ZIP structure)
-  const rels = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
-</Relationships>`;
-
-  const wordRels = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-</Relationships>`;
-
-  const contentTypes = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
-  <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
-  <Default Extension="xml" ContentType="application/xml"/>
-  <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
-</Types>`;
-
-  const zip = buildZip([
-    { name: '[Content_Types].xml', content: contentTypes },
-    { name: '_rels/.rels', content: rels },
-    { name: 'word/document.xml', content: xmlContent },
-    { name: 'word/_rels/document.xml.rels', content: wordRels },
-  ]);
-
-  const blob = new Blob([zip], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = filename;
-  document.body.appendChild(a); a.click(); document.body.removeChild(a);
-  setTimeout(() => URL.revokeObjectURL(url), 2000);
-}
-
-// Minimal ZIP builder (no compression, stored)
-function buildZip(files) {
-  const enc = new TextEncoder();
-  const localHeaders = [];
-  const centralDir = [];
-  let offset = 0;
-
-  files.forEach(({ name, content }) => {
-    const nameBytes = enc.encode(name);
-    const dataBytes = enc.encode(content);
-    const crc = crc32(dataBytes);
-    const now = new Date();
-    const dosDate = ((now.getFullYear()-1980)<<9)|((now.getMonth()+1)<<5)|now.getDate();
-    const dosTime = (now.getHours()<<11)|(now.getMinutes()<<5)|(now.getSeconds()>>1);
-
-    const local = new Uint8Array(30 + nameBytes.length + dataBytes.length);
-    const dv = new DataView(local.buffer);
-    dv.setUint32(0, 0x504B0304, true); // sig
-    dv.setUint16(4, 20, true); // version
-    dv.setUint16(6, 0, true); // flags
-    dv.setUint16(8, 0, true); // compression (stored)
-    dv.setUint16(10, dosTime, true);
-    dv.setUint16(12, dosDate, true);
-    dv.setUint32(14, crc, true);
-    dv.setUint32(18, dataBytes.length, true);
-    dv.setUint32(22, dataBytes.length, true);
-    dv.setUint16(26, nameBytes.length, true);
-    dv.setUint16(28, 0, true);
-    local.set(nameBytes, 30);
-    local.set(dataBytes, 30 + nameBytes.length);
-
-    const central = new Uint8Array(46 + nameBytes.length);
-    const cdv = new DataView(central.buffer);
-    cdv.setUint32(0, 0x504B0102, true); // sig
-    cdv.setUint16(4, 20, true); cdv.setUint16(6, 20, true);
-    cdv.setUint16(8, 0, true); cdv.setUint16(10, 0, true);
-    cdv.setUint16(12, dosTime, true); cdv.setUint16(14, dosDate, true);
-    cdv.setUint32(16, crc, true);
-    cdv.setUint32(20, dataBytes.length, true);
-    cdv.setUint32(24, dataBytes.length, true);
-    cdv.setUint16(28, nameBytes.length, true);
-    cdv.setUint16(30, 0, true); cdv.setUint16(32, 0, true);
-    cdv.setUint16(34, 0, true); cdv.setUint32(36, 0, true);
-    cdv.setUint32(40, 0x20, true); // external attr
-    cdv.setUint32(42, offset, true);
-    central.set(nameBytes, 46);
-
-    localHeaders.push(local);
-    centralDir.push(central);
-    offset += local.length;
-  });
-
-  const cdOffset = offset;
-  const cdSize = centralDir.reduce((s,c)=>s+c.length,0);
-  const eocd = new Uint8Array(22);
-  const edv = new DataView(eocd.buffer);
-  edv.setUint32(0, 0x504B0506, true);
-  edv.setUint16(4, 0, true); edv.setUint16(6, 0, true);
-  edv.setUint16(8, files.length, true); edv.setUint16(10, files.length, true);
-  edv.setUint32(12, cdSize, true);
-  edv.setUint32(16, cdOffset, true);
-  edv.setUint16(20, 0, true);
-
-  const total = [...localHeaders, ...centralDir, eocd].reduce((s,a)=>s+a.length,0);
-  const out = new Uint8Array(total);
-  let pos = 0;
-  [...localHeaders, ...centralDir, eocd].forEach(a => { out.set(a, pos); pos += a.length; });
-  return out;
-}
-
-function crc32(data) {
-  const table = new Uint32Array(256);
-  for (let i = 0; i < 256; i++) {
-    let c = i;
-    for (let j = 0; j < 8; j++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
-    table[i] = c;
-  }
-  let crc = 0xFFFFFFFF;
-  for (let i = 0; i < data.length; i++) crc = (crc >>> 8) ^ table[(crc ^ data[i]) & 0xFF];
-  return (crc ^ 0xFFFFFFFF) >>> 0;
-}
-
-// ─── FIX: DOC DOWNLOAD FROM SAVED MERCHANT ───────────────────────────────────
-// Override renderDocList to work for both pendingDocs and saved merchant docs
-function renderDocList(docs) {
-  const list = docs !== undefined ? docs : pendingDocs;
-  const c = document.getElementById('docList');
-  if (!c) return;
-  if (!list.length) { c.innerHTML = '<div style="color:var(--text3);font-size:13px;padding:8px 0">No documents attached yet.</div>'; return; }
-  const iconColors = { doc: 'var(--blue-bg)', pdf: 'var(--red-bg)', img: 'var(--green-bg)' };
-  c.innerHTML = list.map(d => `<div class="doc-item">
-    <div class="doc-icon" style="background:${iconColors[d.type] || 'var(--bg3)'}">
-      ${d.type === 'img' && d.dataUrl ? `<img src="${d.dataUrl}" style="width:32px;height:32px;object-fit:cover;border-radius:4px">` : `<span style="font-size:10px;font-weight:600;color:var(--text2);font-family:'DM Mono',monospace">${(d.type||'?').toUpperCase()}</span>`}
-    </div>
-    <div class="doc-meta">
-      <div class="doc-name">${d.name}</div>
-      <div class="doc-type">${d.extractedText ? 'Text extracted' : d.b64 || d.dataUrl ? 'Ready to download' : 'Stored'}</div>
-    </div>
-    ${(d.b64 || d.dataUrl) ? `<button onclick="downloadDocFixed(${d.id})" title="Download" style="padding:4px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg3);color:var(--text2);cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;transition:all 0.15s;margin-right:4px" onmouseover="this.style.background='var(--accent-bg)';this.style.color='var(--accent2)'" onmouseout="this.style.background='var(--bg3)';this.style.color='var(--text2)'">⬇ Download</button>` : ''}
-    <button class="doc-remove" onclick="removeDoc(${d.id})">✕</button>
-  </div>`).join('');
-}
-
-function downloadDocFixed(id) {
-  // Search both pendingDocs and current merchant's saved docs
-  let d = pendingDocs.find(x => x.id === id);
-  if (!d && editingId) {
-    const m = merchants.find(x => x.id === editingId);
-    if (m && m.docs) d = m.docs.find(x => x.id === id);
-  }
-  if (!d) return;
-  if (d.dataUrl) {
-    const a = document.createElement('a'); a.href = d.dataUrl; a.download = d.name;
-    document.body.appendChild(a); a.click(); document.body.removeChild(a); return;
-  }
-  if (d.b64) {
-    const binary = atob(d.b64);
-    const bytes = new Uint8Array(binary.length);
-    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-    const mimeMap = { doc: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', pdf: 'application/pdf', img: 'image/png' };
-    const blob = new Blob([bytes], { type: mimeMap[d.type] || 'application/octet-stream' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a'); a.href = url; a.download = d.name;
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-  }
-}
-
-
-// ─── PASSWORD SHEET IMPORT ───────────────────────────────────────────────────
-function normalizeName(s) {
-  return (s||'').toLowerCase()
-    .replace(/[^a-z0-9 ]/g,' ')
-    .replace(/\s+/g,' ')
-    .trim();
-}
-
-function fuzzyMatch(a, b) {
-  const na = normalizeName(a), nb = normalizeName(b);
-  if (na === nb) return 1;
-  if (na.includes(nb) || nb.includes(na)) return 0.9;
-  // word overlap score
-  const wa = new Set(na.split(' ')), wb = new Set(nb.split(' '));
-  const common = [...wa].filter(w => wb.has(w) && w.length > 2).length;
-  const total = Math.max(wa.size, wb.size);
-  return total > 0 ? common / total : 0;
-}
-
-function importPasswordSheet(event) {
-  const f = event.target.files[0];
-  if (!f) return;
-  event.target.value = '';
-
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    let rows = [];
-
-    if (f.name.toLowerCase().endsWith('.csv')) {
-      // Parse CSV
-      const text = e.target.result;
-      const lines = text.split('\n').map(l => l.trim()).filter(l => l);
-      function parseCSVLine(line) {
-        const res = []; let cur = ''; let inQ = false;
-        for (let i = 0; i < line.length; i++) {
-          const c = line[i];
-          if (c === '"') { if (inQ && line[i+1] === '"') { cur += '"'; i++; } else { inQ = !inQ; } }
-          else if (c === ',' && !inQ) { res.push(cur); cur = ''; }
-          else { cur += c; }
-        }
-        res.push(cur);
-        return res;
-      }
-      const headers = parseCSVLine(lines[0]).map(h => h.toLowerCase().trim());
-      const nameIdx = headers.findIndex(h => h.includes('business') || h.includes('merchant') || h.includes('name'));
-      const passIdx = headers.findIndex(h => h.includes('pass') || h.includes('password'));
-      if (nameIdx < 0 || passIdx < 0) {
-        alert('Could not find "Business Name" and "Passwords" columns in the CSV.');
-        return;
-      }
-      rows = lines.slice(1).map(l => {
-        const cols = parseCSVLine(l);
-        return { name: (cols[nameIdx]||'').trim(), pass: (cols[passIdx]||'').trim() };
-      }).filter(r => r.name && r.pass);
-    } else {
-      // Parse XLSX
-      const wb = XLSX.read(e.target.result, { type: 'array' });
-      const ws = wb.Sheets[wb.SheetNames[0]];
-      const data = XLSX.utils.sheet_to_json(ws, { defval: '' });
-      const sample = data[0] ? Object.keys(data[0]) : [];
-      const nameKey = sample.find(k => k.toLowerCase().includes('business') || k.toLowerCase().includes('merchant') || k.toLowerCase().includes('name'));
-      const passKey = sample.find(k => k.toLowerCase().includes('pass') || k.toLowerCase().includes('password'));
-      if (!nameKey || !passKey) {
-        alert('Could not find "Business Name" and "Passwords" columns in the spreadsheet.');
-        return;
-      }
-      rows = data.map(r => ({ name: String(r[nameKey]||'').trim(), pass: String(r[passKey]||'').trim() }))
-                 .filter(r => r.name && r.pass);
-    }
-
-    if (!rows.length) { alert('No data rows found in file.'); return; }
-
-    // Match rows to merchants
-    let matched = 0, created = 0;
-    const THRESHOLD = 0.6;
-
-    rows.forEach(row => {
-      let bestScore = 0, bestMerchant = null;
-      merchants.forEach(m => {
-        const score = fuzzyMatch(m.merchantName, row.name);
-        if (score > bestScore) { bestScore = score; bestMerchant = m; }
-      });
-
-      if (bestScore >= THRESHOLD && bestMerchant) {
-        // Existing merchant found — update their GHL password
-        if (bestMerchant.ghlUser || bestMerchant.ghlUrl || bestMerchant.ghlPass) {
-          bestMerchant.ghlPass = row.pass;
-        } else {
-          // Check if there's already an "Imported Password" card to update
-          const existing = (bestMerchant.credCards||[]).find(c => c.name === 'Imported Password');
-          if (existing) {
-            existing.pass = row.pass;
-          } else {
-            if (!bestMerchant.credCards) bestMerchant.credCards = [];
-            bestMerchant.credCards.push({ id: Date.now() + Math.floor(Math.random() * 1000), name: 'Imported Password', link: '', user: '', pass: row.pass });
-          }
-        }
-        matched++;
-      } else {
-        // No match — create a new merchant with this name and password
-        const newMerchant = {
-          id: Date.now() + Math.floor(Math.random() * 1000),
-          merchantName: row.name,
-          status: 'In Progress',
-          group: '',
-          assignee: '',
-          timezone: '',
-          oldSoftware: '',
-          website: '',
-          month: String(new Date().getMonth() + 1),
-          dataMigration: '',
-          paymentMigration: '',
-          widgetCustomization: '',
-          websiteIntegration: '',
-          accessControl: '',
-          onboardingStatus: '',
-          comments: '',
-          statusOfWork: '',
-          extraNotes: '',
-          modules: [],
-          docs: [],
-          ghlUrl: '',
-          ghlUser: '',
-          ghlPass: row.pass,
-          credCards: [],
-          brandedApp: {}
-        };
-        merchants.push(newMerchant);
-        created++;
-      }
-    });
-
-    saveData(() => {
-      render();
-      renderCredPage();
-      const parts = [];
-      if (matched > 0) parts.push(`${matched} merchant${matched>1?'s':''} updated`);
-      if (created > 0) parts.push(`${created} new merchant${created>1?'s':''} created`);
-      const msg = parts.length > 0
-        ? `Done! ${parts.join(', ')}.`
-        : 'No data processed. Check that your file has "Business Name" and "Password" columns.';
-      alert(msg);
-    });
-  };
-
-  if (f.name.toLowerCase().endsWith('.csv')) {
-    reader.readAsText(f);
-  } else {
-    reader.readAsArrayBuffer(f);
-  }
-}
-// ─────────────────────────────────────────────────────────────────────────────
+function importData(event){const f=event.target.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{try{const d=JSON.parse(e.target.result);if(!Array.isArray(d))throw 0;if(!confirm(`Import ${d.length} merchants? Replaces current data.`))return;merchants=d;saveData(()=>render());}catch{alert('Invalid JSON file.');}};r.readAsText(f);event.target.value='';}
 
 initFirebase();
 </script>
 </body>
 </html>
-
-<!--
-Copyright (c) 2026 David Eduan Snyman / AEONFORGE CAPITAL
-
-All rights reserved.
-
-This software is proprietary. No part of this code may be copied,
-modified, or distributed without explicit permission from the owner.
--->
